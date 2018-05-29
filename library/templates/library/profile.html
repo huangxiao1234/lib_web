@@ -1,0 +1,107 @@
+{% extends "library/base.html" %}
+{% load staticfiles %}
+{% block title %}查看读者信息{% endblock %}
+
+{% block content %}
+
+    {% if state %}
+        <div class="col-md- col-md-offset-0">
+            <br>
+            <div class="alert alert-info alert-md">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                {% if state == 'renew_success' %}
+                    <h1>续借成功</h1>
+                {% elif state == 'return_success' %}
+                    <h1>还书成功</h1>
+                {% elif state == 'borrow_success' %}
+                    <h1>借书成功</h1>
+                {% elif state == 'order_success' %}
+                    <h1>预约成功</h1>
+                {% elif state == 'unorder_success' %}
+                    <h1>取约成功</h1>
+                {% elif state == 'reorder_success' %}
+                    <h1>续约成功</h1>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+
+    <div class="container myContainer">
+        <div class="row">
+            <div class="col-md-9 col-md-offset-0">
+                <div class="col-md-0">
+
+                </div>
+                <div class="col-md-12 col-md-offset-0">
+                    <h2>姓名:{{ reader.name }}</h2>
+                    <br>
+                    <h4><span class=""></span>
+                        电话：{{ reader.phone }}
+
+                    </h4>
+                    <h4>余额：{{ reader.balance }}</h4>
+                    <h4>可借数量：{{ reader.max_borrowing }}</h4>
+                    <hr>
+                    <table class="table col-md-10">
+                        <thead>
+                        <th class="col-md-5"><h4>正在借阅:</h4></th>
+                        <th class="col-md-5"><h4>应还日期：</h4></th>
+                        </thead>
+                        <tbody>
+                        {% for b in borrowing %}
+                            <tr>
+                                <td><h4>{{ b.ISBN.title }}</h4></td>
+                                <td><h4>{{ b.date_due_to_returned|date:'Y-m-d' }}</h4></td>
+                                <td>
+                                    <button class="btn btn-primary"
+                                            onclick="location.href='../book/action?action=renew_book&id={{ b.id }}';">续借
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary"
+                                            onclick="location.href='../book/action?action=return_book&id={{ b.id }}';">
+                                        还书
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <table class="table col-md-">
+                        <thead>
+                        <th class="col-md-5"><h4>正在预约:</h4></th>
+                        <th class="col-md-5"><h4>预约到期：</h4></th>
+                        </thead>
+                        <tbody>
+                        {% for o in ordering %}
+                            <tr>
+                                <td><h4>{{ o.ISBN.title }}</h4></td>
+                                <td><h4>{{ o.date_due_to_returned|date:'Y-m-d' }}</h4></td>
+                                <td>
+                                    <button class="btn btn-primary"
+                                            onclick="location.href='../book/action?action=reorder_book&id={{ o.id }}';">
+                                        续约
+                                    </button>
+                                    <button class="btn btn-primary"
+                                            onclick="location.href='../book/action?action=unorder_book&id={{ o.id }}';">
+                                        取约
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <ul>
+                    </ul>
+                </div>
+                <!--<div class="img-rounded profile-photo">-->
+                        <!--<img src="{% static '/media/' %}{{ reader.photo}}" width="250"-->
+                                 <!--height="400" alt="图挂了">-->
+                        <!--&lt;!&ndash;<img src="static/media/1.jpg" alt="暂无图片">&ndash;&gt;-->
+                    <!--</div>-->
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

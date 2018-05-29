@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <title>欢迎进入管理员系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Bootstrap -->
+    {% load static %}
+    <link href="{% static 'library/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'library/jquery.easy-pie-chart.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'library/styles.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'library/morris.css' %}" rel="stylesheet" media="screen">
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name"><a href="/admin/">图书馆信息管理</a></h1>
+        </div>
+        <div id="user-tools">
+            欢迎，
+            <strong>admin</strong>.
+            <a href="/">查看站点</a> /
+            <a href="/admin/password_change/">修改密码</a> /
+            <a href="/admin/logout/">注销</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" id="sidebar">
+                <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                    <li>
+                        <a href="/admin"><i class="icon-chevron-right"></i> 用户管理</a>
+                    </li>
+                    <li class="active">
+                        <a href="/userData"><i class="icon-chevron-right"></i> 数据分析</a>
+                    </li>
+                    <li>
+                        <a href="/calendar"><i class="icon-chevron-right"></i> 日志记录</a>
+                    </li>
+                    <li>
+                        <a href="/suConfig"><i class="icon-chevron-right"></i> 参数配置（超级管理员）</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/span-->
+            <div class="span9" id="content">
+                <div class="row-fluid">
+                    <!-- block -->
+                    <div class="block">
+                        <div class="navbar navbar-inner block-header">
+                            <div class="muted pull-left">数据</div>
+                        </div>
+                        <div class="block-content collapse in">
+                            <div class="span3">
+                                <div class="chart" data-percent="20">8</div>
+                                <div class="chart-bottom-heading"><span class="label label-info">访客人次</span>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="chart" data-percent="53">16</div>
+                                <div class="chart-bottom-heading"><span class="label label-info">访问量</span>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="chart" data-percent="13">4</div>
+                                <div class="chart-bottom-heading"><span class="label label-info">用户数</span>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="chart" data-percent="73">21</div>
+                                <div class="chart-bottom-heading"><span class="label label-info">请求数</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+                    <!-- morris stacked chart -->
+                    <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">浏览器访问数量统计</div>
+                                <div class="pull-right"><span class="badge badge-warning">View More</span>
+                                </div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <div id="hero-area" style="height: 250px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                    <!-- morris graph chart -->
+                    <div class="row-fluid section">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">流量统计</div>
+                                <div class="pull-right"><span class="badge badge-warning">View More</span>
+                                </div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <div id="hero-graph" style="height: 230px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                    <!-- morris bar & donut charts -->
+                    <div class="row-fluid section" style="opacity: 0;">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">策略板块统计</div>
+                                <div class="pull-right"><span class="badge badge-warning">View More</span>
+                                </div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span6 chart">
+                                    <h5>板块均价</h5>
+                                    <div id="hero-bar" style="height: 250px;"></div>
+                                </div>
+                                <div class="span5 chart">
+                                    <h5>板块销售量统计</h5>
+                                    <div id="hero-donut" style="height: 250px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <hr>
+    </div>
+    <style>
+    #header {
+        width: auto;
+        height: 40px;
+        padding: 10px 40px;
+        background: #417690;
+        line-height: 40px;
+        color: #ffc;
+        overflow: hidden;
+    }
+
+    #branding {
+        float: left;
+    }
+
+    #branding h1,
+    #branding h1 a:link,
+    #branding h1 a:visited {
+        color: #f5dd5d;
+    }
+
+    #branding h1 {
+        padding: 0;
+        margin: 0 20px 0 0;
+        font-weight: 300;
+        font-size: 24px;
+        color: #f5dd5d;
+    }
+
+    h1 {
+        margin: 0 0 20px;
+        font-weight: 300;
+        font-size: 20px;
+        color: #666;
+    }
+
+    #user-tools {
+        float: right;
+        padding: 0;
+        margin: 0 0 0 20px;
+        font-weight: 300;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        text-align: right;
+    }
+
+    @media (min-width: 979px) {
+        body {
+            padding-top: 0px;
+            ！important
+        }
+    }
+
+    .nav-list>.active>a,
+    .nav-list>.active>a:hover,
+    .nav-list>.active>a:focus {
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+        background-color: #417690;
+        ！important
+    }
+
+    #header a {
+        color: #fff;
+    }
+    </style>
+    <!--/.fluid-container-->
+    {% load static %}
+    <script src="{% static 'library/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'library/jquery.easy-pie-chart.js' %}"></script>
+    <script src="{% static 'library/jquery.knob.js' %}"></script>
+    <script src="{% static 'library/raphael-min.js' %}"></script>
+    <script src="{% static 'library/morris.min.js' %}"></script>
+    <script src="{% static 'library/scripts.js' %}"></script>
+    <script type="text/javascript">
+    $(function() {
+        var data = [
+            ["January", 10],
+            ["February", 8],
+            ["March", 4],
+            ["April", 13],
+            ["May", 17],
+            ["June", 9]
+        ];
+
+        $.plot("#catchart", [data], {
+            series: {
+                bars: {
+                    show: true,
+                    barWidth: 0.6,
+                    align: "center"
+                }
+            },
+            xaxis: {
+                mode: "categories",
+                tickLength: 0
+            }
+        });
+
+        var data = [],
+            series = Math.floor(Math.random() * 6) + 3;
+
+        for (var i = 0; i < series; i++) {
+            data[i] = {
+                label: "Series" + (i + 1),
+                data: Math.floor(Math.random() * 100) + 1
+            }
+        }
+
+        $.plot('#piechart1', data, {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    label: {
+                        show: true,
+                        radius: 3 / 4,
+                        formatter: labelFormatter,
+                        background: {
+                            opacity: 0.5,
+                            color: '#000'
+                        }
+                    }
+                }
+            },
+            legend: {
+                show: false
+            }
+        });
+
+        $.plot('#piechart2', data, {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    tilt: 0.5,
+                    label: {
+                        show: true,
+                        radius: 1,
+                        formatter: labelFormatter,
+                        background: {
+                            opacity: 0.8
+                        }
+                    },
+                    combine: {
+                        color: '#999',
+                        threshold: 0.1
+                    }
+                }
+            },
+            legend: {
+                show: false
+            }
+        });
+
+        function euroFormatter(v, axis) {
+            return v.toFixed(axis.tickDecimals) + "€";
+        }
+
+        function doPlot(position) {
+            $.plot("#timechart", [
+                { data: oilprices, label: "全市场策略均价 (¥)" },
+                { data: exchangerates, label: "沪深300", yaxis: 2 }
+            ], {
+                xaxes: [{ mode: "time" }],
+                yaxes: [{ min: 0 }, {
+                    // align if we are to the right
+                    alignTicksWithAxis: position == "right" ? 1 : null,
+                    position: position,
+                    tickFormatter: euroFormatter
+                }],
+                legend: { position: "sw" }
+            });
+        }
+
+        doPlot("right");
+    });
+
+    // Morris Bar Chart
+    // Morris.Bar({
+    //     element: 'hero-bar',
+    //     data: [
+    //         { device: '1', sells: 136 },
+    //         { device: '3G', sells: 1037 },
+    //         { device: '3GS', sells: 275 },
+    //         { device: '4', sells: 380 },
+    //         { device: '4S', sells: 655 },
+    //         { device: '5', sells: 1571 }
+    //     ],
+    //     xkey: 'device',
+    //     ykeys: ['sells'],
+    //     labels: ['Sells'],
+    //     barRatio: 0.4,
+    //     xLabelMargin: 10,
+    //     hideHover: 'auto',
+    //     barColors: ["#3d88ba"]
+    // });
+
+
+    // Morris Donut Chart
+    // Morris.Donut({
+    //     element: 'hero-donut',
+    //     data: [
+    //         { label: '人工智能', value: 25 },
+    //         { label: '动量反转', value: 40 },
+    //         { label: '大/小市值', value: 25 },
+    //         { label: '大/小盘股', value: 10 }
+    //     ],
+    //     colors: ["#30a1ec", "#76bdee", "#c4dafe"],
+    //     formatter: function(y) { return y + "%" }
+    // });
+
+
+    // Morris Line Chart
+    var tax_data = [
+        { "period": "2018-05-19", "visits": 2, "signups": 1 },
+        { "period": "2018-05-20", "visits": 0, "signups": 0 },
+        { "period": "2018-05-21", "visits": 6, "signups": 1 },
+        { "period": "2018-05-22", "visits": 3, "signups": 0 },
+        { "period": "2018-05-23", "visits": 12, "signups": 2 },
+        { "period": "2018-05-24", "visits": 14, "signups": 2 },
+    ];
+    Morris.Line({
+        element: 'hero-graph',
+        data: tax_data,
+        xkey: 'period',
+        xLabels: "month",
+        ykeys: ['visits', 'signups'],
+        labels: ['访问量', '注册量']
+    });
+
+
+
+    // Morris Area Chart
+
+ Morris.Area({
+        element: 'hero-area',
+        data: [
+            { period: '2018-05-19', iphone: 2, ipad:0, itouch: 0 },
+            { period: '2018-05-20',iphone: 0, ipad: 0, itouch: 0 },
+            { period: '2018-05-21', iphone: 4, ipad: 2, itouch: 0 },
+            { period: '2018-05-22',iphone: 0, ipad: 0, itouch: 3 },
+            { period: '2018-05-23',iphone: 6, ipad: 4, itouch: 2 },
+            { period: '2018-05-24',iphone: 8, ipad: 5, itouch: 1 },
+        ],
+        xkey: 'period',
+        ykeys: ['iphone', 'ipad', 'itouch'],
+        labels: ['FireForx', 'Chrome', 'IE'],
+        lineWidth: 2,
+        hideHover: 'auto',
+        lineColors: ["#81d5d9", "#a6e182", "#67bdf8"]
+    });
+
+
+    // Build jQuery Knobs
+    $(".knob").knob();
+
+    function labelFormatter(label, series) {
+        return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+    }
+            $('.chart').easyPieChart({ animate: 1000 });
+
+    </script>
+
+</body>
+
+</html>

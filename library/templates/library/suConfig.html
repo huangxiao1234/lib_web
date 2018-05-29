@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <title>欢迎进入管理员系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> {% load static %}
+    <link href="{% static 'library/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'library/jquery.easy-pie-chart.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'library/styles.css' %}" rel="stylesheet" media="screen">
+    <!-- main css file -->
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name"><a href="/admin/">图书馆信息管理</a></h1>
+        </div>
+        <div id="user-tools">
+            欢迎，
+            <strong>admin</strong>.
+            <a href="/">查看站点</a> /
+            <a href="/admin/password_change/">修改密码</a> /
+            <a href="/admin/logout/">注销</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" id="sidebar">
+                <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                    <li>
+                        <a href="/admin"><i class="icon-chevron-right"></i> 用户管理</a>
+                    </li>
+                    <li>
+                        <a href="/userData"><i class="icon-chevron-right"></i> 数据分析</a>
+                    </li>
+                    <li>
+                        <a href="/calendar"><i class="icon-chevron-right"></i> 日志记录</a>
+                    </li>
+                    <li class="active">
+                        <a href="/suConfig"><i class="icon-chevron-right"></i> 参数配置（超级管理员）</a>
+                    </li>
+                </ul>
+            </div>
+            <table class="table table-striped" style="width: 75%;margin-top: 40px;">
+                <caption style="margin-bottom: 20px;font-size: 28px;color: #417690;">系统参数配置</caption>
+                <thead>
+                    <tr>
+                        <th>功能名称</th>
+                        <th>参数名称</th>
+                        <th>配给值</th>
+                        <th>修改</th>
+                    </tr>
+                </thead>
+                <hr>
+                <tbody>
+                    <tr>
+                        <td>读者借阅</td>
+                        <td>借阅天数上限</td>
+                        <td>
+                            <input type="" name="" style="width: 100px;" placeholder="30">天</td>
+                        <td>
+                            <button>确认</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>读者借阅</td>
+                        <td>借阅书目上限</td>
+                        <td>
+                            <input type="" name="" style="width: 100px;" placeholder="4">本
+                        </td>
+                        <td>
+                            <button>确认</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>读者借阅</td>
+                        <td>逾期罚款设定</td>
+                        <td>
+                            <input type="" name="" style="width: 100px;" placeholder="2">元/天</td>
+                        <td>
+                            <button>确认</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>读者借阅</td>
+                        <td>浏览书目限制</td>
+                        <td>
+                            <input type="" name="" style="width: 100px;" placeholder="100">本/天</td>
+                        <td>
+                            <button>确认</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>书籍管理</td>
+                        <td>每日上架限制</td>
+                        <td>
+                            <input type="" name="" style="width: 100px;" placeholder="10">本
+                        </td>
+                        <td>
+                            <button>确认</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>书籍管理</td>
+                        <td>每日移除限制</td>
+                        <td>
+                            <input type="" name="" style="width: 100px;" placeholder="10">本</td>
+                        <td>
+                            <button>确认</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>预约管理</td>
+                        <td>预约天数上限</td>
+                        <td>
+                            <input type="" name="" style="width: 100px;" placeholder="7">天</td>
+                        <td>
+                            <button>确认</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>预约管理</td>
+                        <td>预约书本上限</td>
+                        <td>
+                            <input type="" name="" style="width: 100px;" placeholder="5">本/人</td>
+                        <td>
+                            <button>确认</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>预约管理</td>
+                        <td>邮件通知功能</td>
+                        <td>
+                            <input type="" name="" style="width: 100px;" placeholder="1开启,2关闭">
+                        </td>
+                        <td>
+                            <button>确认</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+        </div>
+    </div>
+    <style>
+    #header {
+        width: auto;
+        height: 40px;
+        padding: 10px 40px;
+        background: #417690;
+        line-height: 40px;
+        color: #ffc;
+        overflow: hidden;
+    }
+
+    #branding {
+        float: left;
+    }
+
+    #branding h1,
+    #branding h1 a:link,
+    #branding h1 a:visited {
+        color: #f5dd5d;
+    }
+
+    #branding h1 {
+        padding: 0;
+        margin: 0 20px 0 0;
+        font-weight: 300;
+        font-size: 24px;
+        color: #f5dd5d;
+    }
+
+    h1 {
+        margin: 0 0 20px;
+        font-weight: 300;
+        font-size: 20px;
+        color: #666;
+    }
+
+    #user-tools {
+        float: right;
+        padding: 0;
+        margin: 0 0 0 20px;
+        font-weight: 300;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        text-align: right;
+    }
+
+    @media (min-width: 979px) {
+        body {
+            padding-top: 0px;
+            ！important
+        }
+    }
+
+    .nav-list>.active>a,
+    .nav-list>.active>a:hover,
+    .nav-list>.active>a:focus {
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+        background-color: #417690;
+        ！important
+    }
+
+    #header a {
+        color: #fff;
+    }
+
+    tbody button {
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        background-color: #417690;
+
+        background-repeat: repeat-x;
+        border-color: #04c #04c #002a80;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    }
+    </style>
+    <!--/.fluid-container-->
+    {% load static %}
+    <script src="{% static 'library/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'library/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript">
+    $("button").click(function(event) {
+        var selecter = window.getSelection();
+        alert(selecter + "配置成功！");
+    })
+    </script>
+</body>
+
+</html>
